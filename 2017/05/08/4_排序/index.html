@@ -1,0 +1,676 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="title：排序思想Java中通常要对一些对象进行排序。对对象的大小描述是通过Comparable接口机制完成。对于一些经典的排序进行回顾。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hou's Daily Tech">
+<meta property="og:url" content="http://yoursite.com/2017/05/08/4_排序/index.html">
+<meta property="og:site_name" content="Hou's Daily Tech">
+<meta property="og:description" content="title：排序思想Java中通常要对一些对象进行排序。对对象的大小描述是通过Comparable接口机制完成。对于一些经典的排序进行回顾。">
+<meta property="og:updated_time" content="2017-05-08T15:22:12.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hou's Daily Tech">
+<meta name="twitter:description" content="title：排序思想Java中通常要对一些对象进行排序。对对象的大小描述是通过Comparable接口机制完成。对于一些经典的排序进行回顾。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/08/4_排序/"/>
+
+
+
+
+
+  <title>  | Hou's Daily Tech </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hou's Daily Tech</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/4_排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="侯钧耀">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hou's Daily Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T08:22:12-07:00">
+                2017-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="title：排序思想"><a href="#title：排序思想" class="headerlink" title="title：排序思想"></a>title：排序思想</h2><p>Java中通常要对一些对象进行排序。对对象的大小描述是通过Comparable接口机制完成。<br>对于一些经典的排序进行回顾。<br><a id="more"></a></p>
+<h2 id="排序算法类的模板"><a href="#排序算法类的模板" class="headerlink" title="排序算法类的模板"></a>排序算法类的模板</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">public class Example</div><div class="line">&#123;</div><div class="line">	public static void sort (Comparable[] a)</div><div class="line">	&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	private static boolean less(Comparable v, Comparable w)&#123;</div><div class="line">		</div><div class="line">		<span class="built_in">return</span> v.compareTo(w)&lt;0;</div><div class="line">		&#125;</div><div class="line">	private static void exch(Comparable[] a,int i ,int j)&#123;</div><div class="line">		</div><div class="line">		 Comparable&lt;T&gt; t = a[i];  </div><div class="line">	        a[i] = a[j];  </div><div class="line">	        a[j] = t;</div><div class="line">	&#125;</div><div class="line">	private static &lt;T&gt; void show(Comparable&lt;T&gt;[] a)&#123;  </div><div class="line">	        //在单行中打印数组  </div><div class="line">	        <span class="keyword">for</span> (int i = 0; i &lt; a.length; i++) &#123;  </div><div class="line">	            System.out.print(a[i] + <span class="string">""</span>);  </div><div class="line">	            System.out.println();  </div><div class="line">	        &#125;  </div><div class="line">	&#125;</div><div class="line">	public static &lt;T&gt; boolean isSorted(Comparable&lt;T&gt;[] a)&#123;  </div><div class="line">        //测试数组元素是否有序  </div><div class="line">        <span class="keyword">for</span> (int i = 0; i &lt; a.length; i++) &#123;  </div><div class="line">            <span class="keyword">if</span>(less(a[i], a[i-1]))  </div><div class="line">                <span class="built_in">return</span> <span class="literal">false</span>;  </div><div class="line">        &#125;  </div><div class="line">        <span class="built_in">return</span> <span class="literal">true</span>;  </div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	 public static void main(String[] args) throws FileNotFoundException &#123;  </div><div class="line">	        // TODO Auto-generated method stub  </div><div class="line">	      String[] a = &#123;<span class="string">"S"</span>,<span class="string">"O"</span>,<span class="string">"R"</span>,<span class="string">"T"</span>,<span class="string">"E"</span>,<span class="string">"X"</span>,<span class="string">"A"</span>,<span class="string">"M"</span>,<span class="string">"P"</span>,<span class="string">"L"</span>,<span class="string">"E"</span>&#125;;  </div><div class="line">	        sort(a);  </div><div class="line">	        assert isSorted(a);  </div><div class="line">	        show(a);  </div><div class="line">	          </div><div class="line">	    &#125;  </div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class Xuanze &#123;</div><div class="line"></div><div class="line">	public static &lt;T&gt; void sort(Comparable&lt;T&gt; a)&#123;</div><div class="line">		int N=a.length(); //a 数组的长度</div><div class="line">		<span class="keyword">for</span> (int i=0; i&lt;N;i++) //N次</div><div class="line">		&#123;</div><div class="line">			int min = i;//每次默认最小是第一个数</div><div class="line">			<span class="keyword">for</span>(int j=i+1;j&lt;N;j++)//第i个数与i+1到N的最小元素交换</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">if</span>(less(a[j],a[min]))&#123;</div><div class="line">					min=j;//谁笑min放谁</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			exch(a,i,min);//把最小的与当前i交换</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>public class Charu {<br>    public static <t> void insertSort(Comparable<t>[] a){</t></t></p>
+<pre><code>    int N=a.length;//检查后面元素比前面元素小就换位置
+    for(int i=1;i&lt;N;i++){
+        for(int j=i;j&lt;0 &amp;&amp; less(a[j],a[j-1]);j--){
+            exch(a,j,j-1);
+        }
+    }
+
+}
+</code></pre><p>}</p>
+<h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><pre><code>希尔排序的思想是根据插入排序的特点.使任意间隔为h的元素都是有序的。
+http://blog.csdn.net/morewindows/article/details/6668714中的例子有助于理解。
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class Xier &#123;</div><div class="line">	void shellsort3(int a[], int n)  </div><div class="line">	&#123;  </div><div class="line">	    int i, j, gap;  </div><div class="line">	  </div><div class="line">	    <span class="keyword">for</span> (gap = n / 2; gap &gt; 0; gap /= 2)  //每次减半</div><div class="line">	        <span class="keyword">for</span> (i = gap; i &lt; n; i++)  </div><div class="line">	            <span class="keyword">for</span> (j = i - gap; j &gt;= 0 &amp;&amp; a[j] &gt; a[j + gap]; j -= gap)  </div><div class="line">	                exch(a,a[j], a[j + gap]);  </div><div class="line">	&#125;  </div><div class="line">&#125;</div><div class="line">//上述希尔排序的步长选择都是从n/2开始，每次再减半，直到最后为1。</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">###归并排序</span></div><div class="line"></div><div class="line">	思想：</div><div class="line">	归并排序的基本思想</div><div class="line"></div><div class="line">	将待排序序列R[0...n-1]看成是n个长度为1的有序序列，将相邻的有序表成对归并，得到n/2个长度为2的有序表；将这些有序序列再次归并，得到n/4个长度为4的有序序列；如此反复进行下去，最后得到一个长度为n的有序序列。</div><div class="line"></div><div class="line">	综上可知：</div><div class="line"></div><div class="line">	归并排序其实要做两件事：</div><div class="line"></div><div class="line">	（1）“分解”——将序列每次折半划分。</div><div class="line"></div><div class="line">	（2）“合并”——将划分后的序列段两两合并后排序。</div><div class="line"></div><div class="line">	 </div><div class="line"></div><div class="line">	我们先来考虑第二步，如何合并？</div><div class="line"></div><div class="line">	在每次合并过程中，都是对两个有序的序列段进行合并，然后排序。</div><div class="line"></div><div class="line">	这两个有序序列段分别为 R[low, mid] 和 R[mid+1, high]。</div><div class="line"></div><div class="line">	先将他们合并到一个局部的暂存数组R2中，带合并完成后再将R2复制回R中。</div><div class="line"></div><div class="line">	为了方便描述，我们称 R[low, mid] 第一段，R[mid+1, high] 为第二段。</div><div class="line"></div><div class="line">	每次从两个段中取出一个记录进行关键字的比较，将较小者放入R2中。最后将各段中余下的部分直接复制到R2中。</div><div class="line"></div><div class="line">	经过这样的过程，R2已经是一个有序的序列，再将其复制回R中，一次合并排序就完成了。</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/04/3/" rel="next" title="常见的github的操作命令">
+                <i class="fa fa-chevron-left"></i> 常见的github的操作命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="侯钧耀" />
+          <p class="site-author-name" itemprop="name">侯钧耀</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay foolish,stay hungry.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title：排序思想"><span class="nav-number">1.</span> <span class="nav-text">title：排序思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法类的模板"><span class="nav-number">2.</span> <span class="nav-text">排序算法类的模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">3.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">3.1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">3.2.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔排序"><span class="nav-number">3.2.1.</span> <span class="nav-text">希尔排序</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">侯钧耀</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

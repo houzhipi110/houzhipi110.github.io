@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/08/4_排序/index.html">
 <meta property="og:site_name" content="Hou's Daily Tech">
 <meta property="og:description" content="Java中通常要对一些对象进行排序。对对象的大小描述是通过Comparable接口机制完成。对于一些经典的排序进行回顾。">
-<meta property="og:updated_time" content="2017-05-08T15:26:55.848Z">
+<meta property="og:updated_time" content="2017-05-09T02:45:05.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序思想">
 <meta name="twitter:description" content="Java中通常要对一些对象进行排序。对对象的大小描述是通过Comparable接口机制完成。对于一些经典的排序进行回顾。">
@@ -285,7 +285,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T08:26:55-07:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T19:45:06-07:00">
                 2017-05-08
               </time>
             
@@ -338,34 +338,19 @@
 http://blog.csdn.net/morewindows/article/details/6668714中的例子有助于理解。
 </code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public class Xier &#123;</div><div class="line">	void shellsort3(int a[], int n)  </div><div class="line">	&#123;  </div><div class="line">	    int i, j, gap;  </div><div class="line">	  </div><div class="line">	    <span class="keyword">for</span> (gap = n / 2; gap &gt; 0; gap /= 2)  //每次减半</div><div class="line">	        <span class="keyword">for</span> (i = gap; i &lt; n; i++)  </div><div class="line">	            <span class="keyword">for</span> (j = i - gap; j &gt;= 0 &amp;&amp; a[j] &gt; a[j + gap]; j -= gap)  </div><div class="line">	                exch(a,a[j], a[j + gap]);  </div><div class="line">	&#125;  </div><div class="line">&#125;</div><div class="line">//上述希尔排序的步长选择都是从n/2开始，每次再减半，直到最后为1。</div></pre></td></tr></table></figure>
 <h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><pre><code>思想：
-归并排序的基本思想
-
-将待排序序列R[0...n-1]看成是n个长度为1的有序序列，将相邻的有序表成对归并，得到n/2个长度为2的有序表；将这些有序序列再次归并，得到n/4个长度为4的有序序列；如此反复进行下去，最后得到一个长度为n的有序序列。
-
-综上可知：
-
-归并排序其实要做两件事：
-
-（1）“分解”——将序列每次折半划分。
-
-（2）“合并”——将划分后的序列段两两合并后排序。
-
-
-
-我们先来考虑第二步，如何合并？
-
-在每次合并过程中，都是对两个有序的序列段进行合并，然后排序。
-
-这两个有序序列段分别为 R[low, mid] 和 R[mid+1, high]。
-
-先将他们合并到一个局部的暂存数组R2中，带合并完成后再将R2复制回R中。
-
-为了方便描述，我们称 R[low, mid] 第一段，R[mid+1, high] 为第二段。
-
-每次从两个段中取出一个记录进行关键字的比较，将较小者放入R2中。最后将各段中余下的部分直接复制到R2中。
-
-经过这样的过程，R2已经是一个有序的序列，再将其复制回R中，一次合并排序就完成了。
-</code></pre><p>```</p>
+</code></pre><p>归并排序的基本思想</p>
+<p>将待排序序列R[0…n-1]看成是n个长度为1的有序序列，将相邻的有序表成对归并，得到n/2个长度为2的有序表；将这些有序序列再次归并，得到n/4个长度为4的有序序列；如此反复进行下去，最后得到一个长度为n的有序序列。</p>
+<p>综上可知：</p>
+<p>归并排序其实要做两件事：</p>
+<p>（1）“分解”——将序列每次折半划分。</p>
+<p>（2）“合并”——将划分后的序列段两两合并后排序。</p>
+<p>我们先来考虑第二步，如何合并？</p>
+<p>在每次合并过程中，都是对两个有序的序列段进行合并，然后排序。</p>
+<p>这两个有序序列段分别为 R[low, mid] 和 R[mid+1, high]。</p>
+<p>先将他们合并到一个局部的暂存数组R2中，带合并完成后再将R2复制回R中。</p>
+<p>为了方便描述，我们称 R[low, mid] 第一段，R[mid+1, high] 为第二段。</p>
+<p>每次从两个段中取出一个记录进行关键字的比较，将较小者放入R2中。最后将各段中余下的部分直接复制到R2中。</p>
+<p>经过这样的过程，R2已经是一个有序的序列，再将其复制回R中，一次合并排序就完成了。</p>
 
       
     </div>
@@ -411,6 +396,10 @@ http://blog.csdn.net/morewindows/article/details/6668714中的例子有助于理
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/15/2/" rel="prev" title="Markdown">
+                Markdown <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>

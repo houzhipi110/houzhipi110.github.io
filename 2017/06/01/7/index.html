@@ -1,0 +1,715 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="MVC框架认识 （ 草稿 ）其实一个刚从学术圈，做各种理论算法，仿真demo转过来得新人，接触到的模型都是数学模型，尝试着用java去实现过去的一些算法，自认为能算个菜鸟程序员了。但真正接触到实际项目，web项目的开发，才发现之前对面向对象的理解只能局限于文字上而已。初窥了一些利用JSP+Servlet+Javabean的传统web开发方式后，遇到了一些疑惑。因为在一些进阶者眼中，至少的掌握了S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hou's Daily Tech">
+<meta property="og:url" content="http://yoursite.com/2017/06/01/7/index.html">
+<meta property="og:site_name" content="Hou's Daily Tech">
+<meta property="og:description" content="MVC框架认识 （ 草稿 ）其实一个刚从学术圈，做各种理论算法，仿真demo转过来得新人，接触到的模型都是数学模型，尝试着用java去实现过去的一些算法，自认为能算个菜鸟程序员了。但真正接触到实际项目，web项目的开发，才发现之前对面向对象的理解只能局限于文字上而已。初窥了一些利用JSP+Servlet+Javabean的传统web开发方式后，遇到了一些疑惑。因为在一些进阶者眼中，至少的掌握了S">
+<meta property="og:image" content="http://yoursite.com/source/images/MVC.jpg">
+<meta property="og:updated_time" content="2017-06-01T14:47:54.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hou's Daily Tech">
+<meta name="twitter:description" content="MVC框架认识 （ 草稿 ）其实一个刚从学术圈，做各种理论算法，仿真demo转过来得新人，接触到的模型都是数学模型，尝试着用java去实现过去的一些算法，自认为能算个菜鸟程序员了。但真正接触到实际项目，web项目的开发，才发现之前对面向对象的理解只能局限于文字上而已。初窥了一些利用JSP+Servlet+Javabean的传统web开发方式后，遇到了一些疑惑。因为在一些进阶者眼中，至少的掌握了S">
+<meta name="twitter:image" content="http://yoursite.com/source/images/MVC.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/01/7/"/>
+
+
+
+
+
+  <title>  | Hou's Daily Tech </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hou's Daily Tech</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="侯钧耀">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hou's Daily Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T07:47:54-07:00">
+                2017-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="MVC框架认识-（-草稿-）"><a href="#MVC框架认识-（-草稿-）" class="headerlink" title="MVC框架认识 （ 草稿 ）"></a>MVC框架认识 （ 草稿 ）</h2><p>其实一个刚从学术圈，做各种理论算法，仿真demo转过来得新人，接触到的模型都是数学模型，尝试着用java去实现过去的一些算法，自认为能算个菜鸟程序员了。但真正接触到实际项目，web项目的开发，才发现之前对面向对象的理解只能局限于文字上而已。初窥了一些利用JSP+Servlet+Javabean的传统web开发方式后，遇到了一些疑惑。因为在一些进阶者眼中，至少的掌握了SSH三大框架之后，才能说java开发正式入门。虽志向不是java开发，但对技术的热爱不得不让我去接触这些框架。好奇心驱使我去了解框架的产生由来，从技术演进的角度去看待框架。</p>
+<a id="more"></a>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>为什么要学习框架？框架到底给我带来了什么？接下来，我们以登录作为一个最简单的例子，来看看不同的年代，我们是怎么写Web程序的。后来，我们放弃了在页面上写逻辑。后来，程序写得越来越多，我们发现，这种在HTML代码中编写Java代码来完成逻辑的方式存在着不少问题：</p>
+<ol>
+<li><p>Java代码由于混杂在一个HTML环境中而显得混乱不堪，可读性非常差。一个JSP文件有时候会变成几十K，甚至上百K。要找一段逻辑，经常无法定位。</p>
+</li>
+<li><p>编写代码时非常困惑，不知道代码到底应该写在哪里，也不知道别人是不是已经曾经实现过类似的功能，到哪里去引用。</p>
+</li>
+<li><p>突然之间，某个需求发生了变化。于是，每个人蒙头开始全程替换，还要小心翼翼的，生怕把别人的逻辑改了。</p>
+</li>
+<li><p>逻辑处理程序需要自己来维护生命周期，对于类似数据库事务、日志等众多模块无法统一支持。</p>
+</li>
+</ol>
+<p>在这个时候，如果有一个产品，它能够将页面上的那些Java代码抽取出来，让页面上尽量少出现Java代码，该有多好。于是许多人开始使用servlet来处理那些业务逻辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public class LoginServlet extends HttpServlet &#123;</div><div class="line">   /* (non-Javadoc)</div><div class="line">   * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)</div><div class="line">   */</div><div class="line">   @Override</div><div class="line">   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;</div><div class="line">   String message = null;</div><div class="line">   RequestDispatcher dispatcher = req.getRequestDispatcher(&quot;/result.jsp&quot;);</div><div class="line">   String name = req.getParameter(&quot;name&quot;);</div><div class="line">   String password = req.getParameter(&quot;password&quot;);</div><div class="line">   UserHandler userHandler = new UserHandler();</div><div class="line">   if(userHandler.authenticate(name, password)) &#123;</div><div class="line">   message = &quot;恭喜你，登录成功&quot;;</div><div class="line">   &#125; else &#123;</div><div class="line">   message = &quot;对不起，登录失败&quot;;</div><div class="line">   &#125;</div><div class="line">   req.setAttribute(&quot;message&quot;, message);</div><div class="line">   dispatcher.forward(req, resp);</div><div class="line">   &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>在这里，我们需要在web.xml中为这个servlet配置url的请求关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;servlet&gt;</div><div class="line">    &lt;servlet-name&gt;Login&lt;/servlet-name&gt;</div><div class="line">    &lt;servlet-class&gt;</div><div class="line">    com.demo2do.servlet.LoginServlet</div><div class="line">    &lt;/servlet-class&gt;</div><div class="line">    &lt;/servlet&gt;</div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">    &lt;servlet-name&gt;Login&lt;/servlet-name&gt;</div><div class="line">    &lt;url-pattern&gt;</div><div class="line">    /Login</div><div class="line">    &lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div></pre></td></tr></table></figure>
+<p>代码重构到这里，我们发现，其实我们的工作量本身并没有减少，只是代码从JSP移动到了Servlet，使得整个流程看上去稍微清楚了一些。然而，为了这么点干净，我们付出的代价是什么？为每个servlet都在web.xml里面去做一个url的请求配置！</p>
+<p>在很多年前，我们这么写程序的。很多年前，那是一个贫苦的年代，如果我们要使用Java在网页上做一些动态的交互功能。很多人会告诉你一个技术，叫做JSP。在我还对Java非常困惑的时候，就有人告诉我，JSP是个好东西，它可以在HTML代码里面写Java代码来完成逻辑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;%</div><div class="line">   String name = request.getParameter(&quot;name&quot;);</div><div class="line">   String password = request.getParameter(&quot;password&quot;);</div><div class="line">   UserHandler userHandler = new UserHandler();</div><div class="line">   if(userHandler.authenticate(name, password)) &#123;</div><div class="line">   %&gt;</div><div class="line">   &lt;p&gt;恭喜你，登录成功&lt;/p&gt;</div><div class="line">   &lt;%</div><div class="line">   &#125; else &#123;</div><div class="line">   %&gt;</div><div class="line">   &lt;p&gt;对不起，登录失败&lt;/p&gt;</div><div class="line">   &lt;%</div><div class="line">   &#125;</div><div class="line">   %&gt;</div></pre></td></tr></table></figure>
+<p>作为一张JSP，它可以接收从别的JSP发送过来的登录请求，并进行处理。这样，我们不需要任何额外的配置文件，也不需要任何框架的帮忙，就能完成逻辑。再后来，出现框架。时代进一步发展，人们发现简单的JSP和Servlet已经很难满足人们懒惰的要求了。于是，人们开始试图总结一些公用的Java类，来解决Web开发过程中碰到的问题。这时，横空出世了一个框架，叫做struts。它非常先进地实现了MVC模式，成为了广大程序员的福音。</p>
+<p>struts的代码示例我就不贴了，网上随便搜搜你可以发现一堆一堆的。在一定程度上，struts能够解决web开发中的职责分配问题，使得显示与逻辑分开。不过在很长一段时间内，使用struts的程序员往往无法分别我们到底需要web框架帮我们做什么，我们到底需要它完成点什么功能？我们到底要什么？在回顾了我们写代码的历史之后，我们回过头来看看，我们到底要什么？</p>
+<p>无论是使用JSP，还是使用Struts1，或是Struts2，我们至少都需要一些必须的元素（如果没有这些元素，或许我还真不知道这个程序会写成什么样子）：</p>
+<ol>
+<li><p>数据在这个例子中，就是name和password。他们共同构成了程序的核心载体。事实上，我们往往会有一个User类来封装name和password，这样会使得我们的程序更加OO。无论怎么说，数据会穿插在这个程序的各处，成为程序运行的核心。</p>
+</li>
+<li><p>页面展示在这个例子中，就是login.jsp。没有这个页面，一切的请求、验证和错误展示也无从谈起。在页面上，我们需要利用HTML，把我们需要展现的数据都呈现出来。同时我们也需要完成一定的页面逻辑，例如，错误展示，分支判断等等。</p>
+</li>
+<li><p>处理具体业务的场所在这里，不同阶段，处理具体业务的场所就不太一样。原来用JSP和Servlet，后来用Struts1或者Struts2的Action。</p>
+</li>
+</ol>
+<p>上面的这些必须出现的元素，在不同的年代，被赋予了不同的表现形式，有的受到时代的束缚，其表现形式非常落后，有的已经不再使用。但是拨开这些外在的表现形式，我们就可以发现，这不就是我们已经熟门熟路的MVC嘛？</p>
+<p> 数据 —— Model，页面展示 —— View，处理具体业务的场所 —— Control</p>
+<p> 所以，框架不重要，概念是王道。只要能够深刻理解MVC的概念，框架对你来说，只是一个jar包而已。</p>
+<p>MVC的概念其实就那么简单，这些概念其实早已深入我们的内心，而我们所缺乏的是将其本质挖掘出来。我们来看看下面这幅图，这是一副流行了很多年的讲述MVC模型的图：</p>
+<p><img src="/source/images/MVC.jpg" alt="img"> </p>
+<p>在这幅图中，MVC三个框框各司其职，结构清晰明朗。不过我觉得这幅图忽略了一个问题，就是数据是动的，数据在View和Control层一旦动起来，就会产生许多的问题：</p>
+<ol>
+<li><p>数据从View层传递到Control层，如何使得一个个扁平的字符串，转化成一个个生龙活虎的Java对象。</p>
+</li>
+<li><p>数据从View层传递到Control层，如何方便的进行数据格式和内容的校验？</p>
+</li>
+<li><p>数据从Control层传递到View层，一个个生龙活虎的Java对象，又如何在页面上以各种各样的形式展现出来。</p>
+</li>
+</ol>
+<p>4.如果你试图将数据请求从View层发送到Control层，你如何才能知道你要调用的究竟是哪个类，哪个方法？一个Http的请求，又如何与Control层的Java代码建立起关系来？除此之外，Control层似乎也没有想象中的那么简单，因为它作为一个控制器，至少还需要处理以下的问题：</p>
+<ol>
+<li><p>作为调用逻辑处理程序的facade门面，如果逻辑处理程序发生了异常，我们该如何处理？</p>
+</li>
+<li><p>对于逻辑处理的结果，我们需要做怎么样的处理才能满足丰富的前台展示需要？</p>
+</li>
+</ol>
+<p>这一个又一个问题的提出，都基于对MVC的基本概念的挖掘。所以，这些问题都需要我们在写程序的时候去一一解决。说到这里，这篇文章开头所提的问题应该可以有答案了：框架是为了解决一个又一个在Web开发中所遇到的问题而诞生的。不同的框架，都是为了解决不同的问题，但是对于程序员而言，他们只是jar包而已。框架的优缺点的评论，也完全取决于其对问题解决程度和解决方式的优雅性的评论。所以，千万不要为了学习框架而学习框架，而是要为了解决问题而学习框架，这才是一个程序员的正确学习之道。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/18/5readme模板/" rel="next" title="Readme/<转/>">
+                <i class="fa fa-chevron-left"></i> Readme/<转/>
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="侯钧耀" />
+          <p class="site-author-name" itemprop="name">侯钧耀</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay foolish,stay hungry.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC框架认识-（-草稿-）"><span class="nav-number">1.</span> <span class="nav-text">MVC框架认识 （ 草稿 ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">侯钧耀</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

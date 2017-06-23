@@ -87,16 +87,15 @@
 
 
 
-<meta name="description" content="注释一些个人常碰到的问题的解决办法，以及高频使用的git命令">
-<meta property="og:type" content="article">
-<meta property="og:title" content="常见的github的操作命令">
-<meta property="og:url" content="http://yoursite.com/2017/05/04/3/index.html">
+<meta name="description" content="Stay foolish,stay hungry.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hou's Daily Tech">
+<meta property="og:url" content="http://yoursite.com/archives/2017/04/index.html">
 <meta property="og:site_name" content="Hou's Daily Tech">
-<meta property="og:description" content="注释一些个人常碰到的问题的解决办法，以及高频使用的git命令">
-<meta property="og:updated_time" content="2017-05-04T07:37:03.352Z">
+<meta property="og:description" content="Stay foolish,stay hungry.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常见的github的操作命令">
-<meta name="twitter:description" content="注释一些个人常碰到的问题的解决办法，以及高频使用的git命令">
+<meta name="twitter:title" content="Hou's Daily Tech">
+<meta name="twitter:description" content="Stay foolish,stay hungry.">
 
 
 
@@ -124,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/04/3/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2017/04/"/>
 
 
 
 
 
-  <title> 常见的github的操作命令 | Hou's Daily Tech </title>
+  <title> 归档 | Hou's Daily Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -155,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,157 +238,66 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/04/3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="侯钧耀">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hou's Daily Tech">
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      嗯..! 目前共计 6 篇日志。 继续努力。
     </span>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                常见的github的操作命令
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T00:37:03-07:00">
-                2017-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
 
       
       
-
-      
-        <p>注释一些个人常碰到的问题的解决办法，以及高频使用的git命令</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">git init  //初始化仓库 会在当前文件夹下创建一个缓存区仓库</div><div class="line">git add index.html </div><div class="line">git commit -m <span class="string">"我的第一篇博客"</span>  // 进行一些操作并描述 在本地缓存区</div><div class="line">git remote add origin https://github.com/houzhipi110/houzhipi110.github.io.git // 远程连接库</div><div class="line">git push -u origin master // 上传</div><div class="line">git pull  origin master //同步本地</div><div class="line">git <span class="built_in">clone</span> //克隆工程</div><div class="line">git remote add origin https://github.com/miaoihan/weibo.git </div><div class="line">git fetch origin    //获取远程更新</div><div class="line">git merge origin/master //把更新的内容合并到本地分支 </div><div class="line">find . -name <span class="string">".git"</span> | xargs rm -Rf //删掉本地缓存区</div><div class="line">git rm -r --cached  <span class="string">"React版单页面音乐播放器"</span> //删掉一个文件夹的操作1</div><div class="line">git commit -m <span class="string">"remove new gitignore directory"</span>//2</div><div class="line">git push origin master   //3</div></pre></td></tr></table></figure>
-<p>详细参考: <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="external">Writing</a></p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
       
 
       
         
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/04/13/7/" rel="next" title="MVC框架认识 （ 草稿 ）">
-                <i class="fa fa-chevron-left"></i> MVC框架认识 （ 草稿 ）
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/08/4_排序/" rel="prev" title="排序思想">
-                排序思想 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
         </div>
       
+      
 
       
-      
-    </footer>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/04/13/7/" itemprop="url">
+              
+                <span itemprop="name">MVC框架认识 （ 草稿 ）</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-04-13T00:00:00-07:00"
+              content="2017-04-13" >
+          04-13
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+    
+
+  </section>
+
+  
+
 
 
           </div>
@@ -397,10 +305,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -588,9 +492,11 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   

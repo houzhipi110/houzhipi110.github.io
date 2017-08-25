@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="技术总结,Node.js," />
 
 
 
@@ -87,18 +87,16 @@
 
 
 
-<meta name="description" content="在github利用Markdown书写项目的Readme文件">
+<meta name="description" content="最近尝试着用node做一些东西，对于一门新的技术，充满了神秘与敬畏，稍做总结，回顾一下这段时间的收获，感受一下与其他技术的不同。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown">
-<meta property="og:url" content="http://yoursite.com/2017/05/18/2/index.html">
+<meta property="og:title" content="node.js 总结（阶段一）">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/8/index.html">
 <meta property="og:site_name" content="Hou's Daily Tech">
-<meta property="og:description" content="在github利用Markdown书写项目的Readme文件">
-<meta property="og:image" content="http://yoursite.com/images/markdown.png">
-<meta property="og:updated_time" content="2017-05-19T01:37:09.026Z">
+<meta property="og:description" content="最近尝试着用node做一些东西，对于一门新的技术，充满了神秘与敬畏，稍做总结，回顾一下这段时间的收获，感受一下与其他技术的不同。">
+<meta property="og:updated_time" content="2017-08-25T04:57:10.997Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown">
-<meta name="twitter:description" content="在github利用Markdown书写项目的Readme文件">
-<meta name="twitter:image" content="http://yoursite.com/images/markdown.png">
+<meta name="twitter:title" content="node.js 总结（阶段一）">
+<meta name="twitter:description" content="最近尝试着用node做一些东西，对于一门新的技术，充满了神秘与敬畏，稍做总结，回顾一下这段时间的收获，感受一下与其他技术的不同。">
 
 
 
@@ -126,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/18/2/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/15/8/"/>
 
 
 
 
 
-  <title> Markdown | Hou's Daily Tech </title>
+  <title> node.js 总结（阶段一） | Hou's Daily Tech </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +259,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/18/2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="侯钧耀">
@@ -282,7 +280,7 @@
             
             
               
-                Markdown
+                node.js 总结（阶段一）
               
             
           </h1>
@@ -297,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-18T18:37:09-07:00">
-                2017-05-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T00:00:00-07:00">
+                2017-08-15
               </time>
             
 
@@ -333,9 +331,22 @@
       
 
       
-        <p>在github利用Markdown书写项目的Readme文件<br><a id="more"></a></p>
-<h2 id="Markdown-语法速查"><a href="#Markdown-语法速查" class="headerlink" title="Markdown 语法速查"></a>Markdown 语法速查</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">1 标题与文字格式  </div><div class="line">标题  </div><div class="line"><span class="comment"># 这是 H1 &lt;一级标题&gt;  </span></div><div class="line"><span class="comment">## 这是 H2 &lt;二级标题&gt;  </span></div><div class="line"><span class="comment">###### 这是 H6 &lt;六级标题&gt;  </span></div><div class="line">文字格式  </div><div class="line">**这是文字粗体格式**  </div><div class="line">*这是文字斜体格式*  </div><div class="line">~~在文字上添加删除线~~  </div><div class="line">2 列表  </div><div class="line">无序列表  </div><div class="line">* 项目1  </div><div class="line">* 项目2  </div><div class="line">* 项目3  </div><div class="line">有序列表  </div><div class="line">1. 项目1  </div><div class="line">2. 项目2  </div><div class="line">3. 项目3  </div><div class="line">   * 项目1  </div><div class="line">   * 项目2  </div><div class="line">3 其它  </div><div class="line">图片  </div><div class="line">![图片名称](http://gitcafe.com/image.png)  </div><div class="line">链接  </div><div class="line">[链接名称](http://gitcafe.com)  </div><div class="line">引用  </div><div class="line">&gt; 第一行引用文字  </div><div class="line">&gt; 第二行引用文字  </div><div class="line">水平线  </div><div class="line">***  </div><div class="line">代码  </div><div class="line">`&lt;hello world&gt;`  </div><div class="line">代码块高亮  </div><div class="line">```ruby  </div><div class="line">  def add(a, b)  </div><div class="line">    <span class="built_in">return</span> a + b  </div><div class="line">  end  </div><div class="line">```  </div><div class="line">表格  </div><div class="line">  表头  | 表头  </div><div class="line">  ------------- | -------------  </div><div class="line"> 单元格内容  | 单元格内容  </div><div class="line"> 单元格内容l  | 单元格内容</div></pre></td></tr></table></figure>
-<p><img src="/images/markdown.png" alt=""></p>
+        <p>最近尝试着用node做一些东西，对于一门新的技术，充满了神秘与敬畏，稍做总结，回顾一下这段时间的收获，感受一下与其他技术的不同。</p>
+<a id="more"></a>
+<h2 id="初入node"><a href="#初入node" class="headerlink" title="初入node"></a>初入node</h2><p>首先，nodejs在语法上与Javascript一样的，nodejs其实就是Javascript的一个开发框架，它本身就是运行V8 JavaScript。V8 JavaScript引擎是Google用于其Chrome浏览器的底层JavaScript引擎。而使用node前，需要了解web应用程序架构（包括流量、处理器速度和内存速度）中的瓶颈——==服务器能够处理的并发连接的最大数量==。对此node的解决方式是：更改连接到服务器的方式。每个连接发射一个在Node.js引擎的进程中运行的事件（event），而不是为每个连接生成一个新的OS线程（同时会分配一些配套内存）。对比Java，Node.js不会死锁，它根本不允许使用锁，它不会直接阻塞 I/O 调用。（这种模型与nginx，redis以及haproxy的结构也比较类似）。</p>
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><p>1.采用事件驱动、异步编程，为网络服务而设计。    </p>
+<p>2.Node.js非阻塞模式的IO处理给Node.js带来在相对低系统资源耗用下的高性能与出众的负载能力，非常适合用作依赖其它IO资源的中间层服务。</p>
+<p>3.特别适数据密集型实时应用。<br>。</p>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><p>1.可靠性低，作为系统服务时经常会奔溃（主要还是自己的代码健壮性太差）。</p>
+<p>2、单进程，单线程，只支持单核CPU，不能充分的利用多核CPU服务器。一旦这个进程崩掉，那么整个web服务就崩掉了。</p>
+<h3 id="个人观点："><a href="#个人观点：" class="headerlink" title="个人观点："></a>个人观点：</h3><p>开发过程中，开发效率会提高很多，代码量也小。同时也有很多Package的加入，方便开发各种各样的功能。对于一些小的系统或者webservice，Nodejs会很方便，同时对于大型的I/O项目它也很适合。在开发OCR过程遇到一些问题，发现其计算能力偏弱，可能是大量的时间在回调，但计算力那是编译语言的强项，js做胶水就好了；业务可以拆分、基于事件驱动的解耦以及业务前置。</p>
+<h3 id="开发小记"><a href="#开发小记" class="headerlink" title="开发小记"></a>开发小记</h3><h4 id="1-动态页面"><a href="#1-动态页面" class="headerlink" title="1.动态页面"></a>1.动态页面</h4><p>在开发完整套OCRWebService后，莫名的想再用Node搞个动态网页，但是当时并没发现官方有提供类似Apache 和Tomcat这样的网页服务器和JSP这样的动态创建网页的技术。<br>但利用expressMVC框架加上一些模板引擎（ejs，jade，dot）还是可以的。</p>
+<h4 id="2-关于异步编程"><a href="#2-关于异步编程" class="headerlink" title="2.关于异步编程"></a>2.关于异步编程</h4><p>刚开始的时候，特别的不适应异步编程。因为还会出现callback，一层一层导致代码是否不优雅。甚至在使用for循环时会发生意想不到的错误（比如当你对同一个变量或者数组操作时，顺序则变成随机的，即回调事件执行是异步的）。当然可以通过引入第三方asyc，Q之类的，但node目前有es6原生promise，目前bluebird promise 应该是运行效率最高的一种。</p>
+<p>当然对于这些解决方案的更深入的理解可以参看<br><a href="https://www.zhihu.com/question/25413141/answer/30767780" target="_blank" rel="external">nodejs异步控制「co、async、Q 、『es6原生promise』、then.js、bluebird」有何优缺点？最爱哪个？哪个简单？</a></p>
+<h4 id="3-开发过程当中遇到的问题"><a href="#3-开发过程当中遇到的问题" class="headerlink" title="3.开发过程当中遇到的问题"></a>3.开发过程当中遇到的问题</h4><p>1.同样因为编写不当出现了内存泄漏等现象，对node当中内存泄漏也会单独写一篇总结。</p>
+<p>2.开发工具，虽然js只需要浏览器和编辑器就可以了。但是Node还是需要找一款比较好的编辑器。VScode免费的编辑器，同时还支持git管理，方便多人开发。</p>
+<p>3.具体细节的问题在项目回顾中在细细品味。</p>
+<h3 id="题外"><a href="#题外" class="headerlink" title="题外"></a>题外</h3><p><a href="http://www.cnblogs.com/qianzf/p/6798627.html" target="_blank" rel="external">nodejs的优点</a></p>
 
       
     </div>
@@ -363,6 +374,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/技术总结/" rel="tag"># 技术总结</a>
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+        </div>
+      
 
       
         
@@ -372,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/08/4_排序/" rel="next" title="排序思想">
-                <i class="fa fa-chevron-left"></i> 排序思想
+              <a href="/2017/05/18/6.javaC++/" rel="next" title="Java与C++部分对比">
+                <i class="fa fa-chevron-left"></i> Java与C++部分对比
               </a>
             
           </div>
@@ -381,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/18/6.javaC++/" rel="prev" title="Java与C++部分对比">
-                Java与C++部分对比 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -515,7 +530,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown-语法速查"><span class="nav-number">1.</span> <span class="nav-text">Markdown 语法速查</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初入node"><span class="nav-number">1.</span> <span class="nav-text">初入node</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点："><span class="nav-number">1.1.</span> <span class="nav-text">优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点："><span class="nav-number">1.2.</span> <span class="nav-text">缺点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人观点："><span class="nav-number">1.3.</span> <span class="nav-text">个人观点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发小记"><span class="nav-number">1.4.</span> <span class="nav-text">开发小记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-动态页面"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.动态页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-关于异步编程"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.关于异步编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-开发过程当中遇到的问题"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.开发过程当中遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题外"><span class="nav-number">1.5.</span> <span class="nav-text">题外</span></a></li></ol></li></ol></div>
             
 
           </div>

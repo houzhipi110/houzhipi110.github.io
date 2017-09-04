@@ -1,0 +1,718 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js,技术总结," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="开发手写OCR过程当中，学习到使用Node.js,当中的一些心得或者困惑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node.js 总结（阶段二）">
+<meta property="og:url" content="http://yoursite.com/2017/08/17/9node2/index.html">
+<meta property="og:site_name" content="Hou's Daily Tech">
+<meta property="og:description" content="开发手写OCR过程当中，学习到使用Node.js,当中的一些心得或者困惑。">
+<meta property="og:image" content="http://yoursite.com/images/OCR.jpg">
+<meta property="og:updated_time" content="2017-09-04T14:56:27.564Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node.js 总结（阶段二）">
+<meta name="twitter:description" content="开发手写OCR过程当中，学习到使用Node.js,当中的一些心得或者困惑。">
+<meta name="twitter:image" content="http://yoursite.com/images/OCR.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/17/9node2/"/>
+
+
+
+
+
+  <title> node.js 总结（阶段二） | Hou's Daily Tech </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hou's Daily Tech</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/9node2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="侯钧耀">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/mcu.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hou's Daily Tech">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                node.js 总结（阶段二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T00:00:00-07:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>开发手写OCR过程当中，学习到使用Node.js,当中的一些心得或者困惑。</p>
+<a id="more"></a>
+<h2 id="项目的介绍"><a href="#项目的介绍" class="headerlink" title="项目的介绍"></a>项目的介绍</h2><p>首先这是一个服务于数据收集与录入的项目。服务对象大量的数据因为一些限制，只能通过手写然后扫描的方式提供给服务器。因此<br>OCR作为一种方案，去解脱人工输入校对的繁琐。当然对于手写数字的输入还会采用一些特点的算法（图像处理），会在图像处理的总结中提出。<br>数据的流向为：人工填写表格=》图片=》服务器=》后台识别=》数据库=》前段管理；</p>
+<h3 id="代码入口"><a href="#代码入口" class="headerlink" title="代码入口"></a>代码入口</h3><p>index.js </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var bodyParser = require(&apos;body-parser&apos;);</div><div class="line">var logger = require(&apos;./lib/bunyanLogger.js&apos;).logger();</div><div class="line">var router = require(&apos;./routes&apos;)(logger);</div><div class="line"></div><div class="line">var app = express();</div><div class="line">app.use(bodyParser.json(&#123; limit: &apos;50mb&apos; &#125;)); // support json encoded bodies</div><div class="line">app.use(bodyParser.urlencoded(&#123; extended: true &#125;)); // support encoded bodies</div><div class="line"></div><div class="line">app.use(&apos;/&apos;, router);</div><div class="line"></div><div class="line">// start</div><div class="line">app.listen(process.env.PORT || 3000, function () &#123;</div><div class="line">    logger.info(&apos;Example app listening on port 3000!&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>其中要注意bodyParser解析数据的时候对于高于1MB的json数据 需要修改limit；<br>测试端口为3000；</p>
+<p>接下来便是搭建一个路由，方便后期其他功能的增加。</p>
+<h3 id="路由编写"><a href="#路由编写" class="headerlink" title="路由编写"></a>路由编写</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">var express = require(&apos;express&apos;);</div><div class="line"></div><div class="line">module.exports = function (logger) &#123;</div><div class="line">    var pg = require(&apos;./lib/pgSql/pgsql&apos;)(logger),</div><div class="line">        db = require(&quot;./lib/pgSql/db.js&quot;)(logger);</div><div class="line"></div><div class="line">    var service = require(&apos;./js/service&apos;)(logger, pg, db),</div><div class="line">        router = express.Router();</div><div class="line">    var lotService = require(&apos;./js/lotService&apos;)(logger, pg, db);</div><div class="line">    var CMMService = require(&apos;./js/CMMService&apos;)(logger, pg, db);</div><div class="line"></div><div class="line">    const fileUpload = require(&apos;express-fileupload&apos;);</div><div class="line"></div><div class="line">    // default options</div><div class="line">    router.use(fileUpload());</div><div class="line">    /*...</div><div class="line">    ...</div><div class="line">    ...*/</div><div class="line">    router.post(&apos;/uploadPDF&apos;, CMMService.uploadPDF);</div><div class="line">    router.get(&apos;/resetOCR&apos;, CMMService.resetOCR);</div><div class="line">    router.get(&apos;/CMM&apos;, CMMService.getCMM);</div><div class="line">    router.get(&apos;/OCRreport&apos;, CMMService.OCRreport);</div><div class="line"></div><div class="line">    router.service = service;</div><div class="line">    router.lotService = lotService;</div><div class="line">    router.CMMService = CMMService;</div><div class="line">    return router;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>选用的是常用的express框架。路由中主要功能还是通过浏览器端的post或者get实现的。</p>
+<p>module.exports 可以将路由中的函数暴露出去，便于其他代码块调用。</p>
+<p>下图是整个工程的结构</p>
+<p><img src="/images/OCR.jpg" alt="image"></p>
+<h3 id="核心服务代码-sevice-js"><a href="#核心服务代码-sevice-js" class="headerlink" title="核心服务代码 sevice.js"></a>核心服务代码 sevice.js</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line">var cfConfig = require(&quot;../lib/config/cfConfig.js&quot;)();</div><div class="line">var request = require(&apos;sync-request&apos;);</div><div class="line">var fs = require(&apos;fs&apos;);</div><div class="line">var export2excel = require(&quot;./export2excel&quot;);</div><div class="line">var RecogPDF = require(&quot;./RecogPDF&quot;);</div><div class="line">var path = require(&apos;path&apos;);</div><div class="line">var _ = require(&apos;lodash&apos;);</div><div class="line">var Promise = require(&apos;bluebird&apos;);</div><div class="line"></div><div class="line">module.exports = function (logger, pg, db) &#123;</div><div class="line"></div><div class="line">    var HttpUtil = require(&quot;../lib/http/httpUtil.js&quot;)(logger),</div><div class="line">        base64 = require(&quot;../lib/base64.js&quot;)(),</div><div class="line">        util = require(&quot;../lib/util.js&quot;)();</div><div class="line">    var commonColumns = [&apos;userid&apos;, &apos;description&apos;, &apos;sheetzone&apos;, &apos;type&apos;, &apos;minvalue&apos;, &apos;maxvalue&apos;,</div><div class="line">        &apos;actualminvalue&apos;, &apos;actualmaxvalue&apos;, &apos;pass&apos;, &apos;datetime&apos;, &apos;mode&apos;, &apos;source&apos;</div><div class="line">    ]</div><div class="line">    var insertCs = db.cs(commonColumns.concat([&apos;sn&apos;, &apos;pn&apos;, &apos;opnum&apos;, &apos;cn&apos;]), &apos;character&apos;);</div><div class="line">    var updateCs = db.cs(commonColumns.concat([&apos;?id&apos;]), &apos;character&apos;);</div><div class="line"></div><div class="line">    function sendResponse(data, res) &#123;</div><div class="line">        logger.info(data);</div><div class="line">        if (data.status !== &quot;success&quot;) &#123;</div><div class="line">            return res.status(400)</div><div class="line">                .json(&#123;</div><div class="line">                    &quot;error&quot;: data.error</div><div class="line">                &#125;);</div><div class="line">        &#125;</div><div class="line">        return res.status(200)</div><div class="line">            .json(data.data);</div><div class="line">    &#125;</div><div class="line">        function sendEcav(data, res) &#123;</div><div class="line">        return res.status(200)</div><div class="line">        .json(data);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    function save(data, res) &#123;</div><div class="line">    //...</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return &#123;</div><div class="line"></div><div class="line">        getParts: function (req, res) &#123;</div><div class="line">            res.setHeader(&apos;Access-Control-Allow-Origin&apos;, &apos;*&apos;);</div><div class="line">            if (req.url.split(&quot;?field=&quot;).length &gt; 1) &#123;</div><div class="line">                return pg.query(db, &quot;any&quot;, &apos;select pn as part from part&apos;)</div><div class="line">                    .then(function (data) &#123;</div><div class="line">                        var pnlist = _.map(data.data, function (o) &#123;</div><div class="line">                            return o.part.pn;</div><div class="line">                        &#125;);</div><div class="line">                        data.data = pnlist;</div><div class="line">                        sendResponse(data, res);</div><div class="line">                    &#125;);</div><div class="line">            &#125; else &#123;</div><div class="line">                return pg.query(db, &quot;any&quot;, &apos;select pn as part from part&apos;)</div><div class="line">                    .then(function (data) &#123;</div><div class="line">                        sendResponse(data, res);</div><div class="line">                    &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        getPart: function (req, res) &#123;</div><div class="line">            res.setHeader(&apos;Access-Control-Allow-Origin&apos;, &apos;*&apos;);</div><div class="line">            return pg.query(db, &quot;one&quot;, &apos;select * from part where (pn::json-&gt;&gt;\&apos;pn\&apos;) = $1&apos;, req.params.partId)</div><div class="line">                .then(function (data) &#123;</div><div class="line">                    sendResponse(data, res);</div><div class="line">                &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>通过路由后后台接受的request便会进入该服务中。<br>其中httpUtil 是负责解析request的<br>通过其解析请求 ，然后进入return；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">var Promise = require(&apos;bluebird&apos;);</div><div class="line">Promise.longStackTraces();</div><div class="line">var requestAsync = Promise.promisify(require(&apos;request&apos;), &#123; multiArgs: true &#125;);</div><div class="line">var logger;</div><div class="line"></div><div class="line">module.exports = function (log) &#123;</div><div class="line">	logger = log;</div><div class="line">	return &#123;</div><div class="line">		GetResource: GetResource,</div><div class="line">		get: function (token, url, header) &#123;</div><div class="line">			header = header ? header : &#123;&#125;;</div><div class="line">			header.Authorization = token;</div><div class="line">			return GetResource(&apos;GET&apos;, url, header);</div><div class="line">		&#125;,</div><div class="line">		post: function (token, url, body, header) &#123;</div><div class="line">			header = header ? header : &#123;&#125;;</div><div class="line">			header.Authorization = token;</div><div class="line">			return GetResource(&apos;POST&apos;, url, header, &#123; body: body, json: true &#125;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function GetResource(method, uri, headers, requestOptions) &#123;</div><div class="line">	if (!requestOptions) requestOptions = &#123;&#125;;</div><div class="line"></div><div class="line">	if (!headers) headers = &#123;&#125;;</div><div class="line"></div><div class="line">	if (!headers[&quot;user-agent&quot;] &amp;&amp; !headers[&quot;User-Agent&quot;]) headers[&quot;User-Agent&quot;] = &quot;pm-cli 1.0&quot;;</div><div class="line">	if (!headers.accept &amp;&amp; !headers.Accept) headers.Accept = &quot;application/json&quot;;</div><div class="line"></div><div class="line">	if (!headers[&quot;content-type&quot;] &amp;&amp; !headers[&quot;Content-Type&quot;]) &#123;</div><div class="line">		if (&apos;form&apos; in requestOptions) &#123;</div><div class="line">			headers[&quot;Content-Type&quot;] = &quot;application/x-www-form-urlencoded&quot;;</div><div class="line">		&#125; else if (</div><div class="line">			requestOptions.json</div><div class="line">			|| requestOptions.data</div><div class="line">		) &#123;</div><div class="line">			headers[&quot;Content-Type&quot;] = &quot;application/json&quot;;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	var options = &#123;</div><div class="line">		gzip: true,</div><div class="line">		method: method,</div><div class="line">		url: uri,</div><div class="line">		headers: headers</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	for (var key in requestOptions) &#123;</div><div class="line">		options[key] = requestOptions[key];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//	logger.trace(&apos;Send HTTP request&apos;, JSON.stringify(options));</div><div class="line">	var t = process.hrtime();</div><div class="line">	return requestAsync(options)</div><div class="line">		.spread(function (response, body) &#123;</div><div class="line">			t = process.hrtime(t);</div><div class="line">			//logger.info(&apos;It took %d seconds and %d nanoseconds to get HTTP Response. request url: %s. request body:  %s&apos;, t[0], t[1], options.url, JSON.stringify(options.body));</div><div class="line"></div><div class="line">			var contentType = response.headers[&quot;content-type&quot;];</div><div class="line">			if (contentType &amp;&amp; (contentType.indexOf(&quot;application/json&quot;) &gt; -1)) &#123;</div><div class="line">				if (typeof (body) === &quot;string&quot;) &#123;</div><div class="line">					try &#123;</div><div class="line">						body = JSON.parse(body);</div><div class="line">					&#125; catch (err) &#123;</div><div class="line">						logger.error(err);</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			var status = response.statusCode;</div><div class="line">			if (status &lt; 200 || status &gt; 299) &#123;</div><div class="line">				//logger.warn(&#123; res: response &#125;, &apos;Get Err HTTP Response. req:&apos; + JSON.stringify(options));</div><div class="line">				return Promise.reject(response);</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			return Promise.resolve(body);</div><div class="line">		&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这算是一个比较完整的设计模式。<del>个人认为应该算作Dependency Injection 依赖注入模式。（依赖注入是将其中的一个或多个依赖或服务注入，或通过引用传递到从属对象的设计模式），服务运行后便一直等待参数的传入。</del><br>通过查阅资料，我发现这其实是一个Middlewares/pipelines 中间件/管道设计模式。<br>中间件是一个强大功能且简单的概念：一个功能单元的输出是下一个功能单元的输入。比如在express中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app.use = function(fn)&#123;  </div><div class="line">  this.middleware.push(fn);</div><div class="line">  return this;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//</div><div class="line"></div><div class="line">var i = middleware.length;  </div><div class="line">while (i--) &#123;  </div><div class="line">  next = middleware[i].call(this, next);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以基本上，当我们添加一个中间件时，它只是被压入一个中间件队列中。但是当一个请求到达这个服务器会发生什么？</p>
+<p>中间件被一个接着一个调用了</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/技术总结/" rel="tag"># 技术总结</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/15/8/" rel="next" title="node.js 总结（阶段一）">
+                <i class="fa fa-chevron-left"></i> node.js 总结（阶段一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/mcu.jpg"
+               alt="侯钧耀" />
+          <p class="site-author-name" itemprop="name">侯钧耀</p>
+           
+              <p class="site-description motion-element" itemprop="description">Stay foolish,stay hungry.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/houzhipi110" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目的介绍"><span class="nav-number">1.</span> <span class="nav-text">项目的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码入口"><span class="nav-number">1.1.</span> <span class="nav-text">代码入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由编写"><span class="nav-number">1.2.</span> <span class="nav-text">路由编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心服务代码-sevice-js"><span class="nav-number">1.3.</span> <span class="nav-text">核心服务代码 sevice.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">侯钧耀</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
